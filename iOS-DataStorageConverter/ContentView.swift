@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  iOS-DataStorageConverter
 //
-//  Created by Russell Gordon on 2021-02-12.
+//  Created by Russell Gordon on 2021-02-11.
 //
 
 import SwiftUI
@@ -29,33 +29,60 @@ struct ContentView: View {
     
     var body: some View {
         
-        Form {
-            Picker("From unit:", selection: $fromUnit) {
-                Text(DataStorageUnit.bit.rawValue).tag(DataStorageUnit.bit)
-                Text(DataStorageUnit.nibble.rawValue).tag(DataStorageUnit.nibble)
-                Text(DataStorageUnit.byte.rawValue).tag(DataStorageUnit.byte)
-                Text(DataStorageUnit.kilobyte.rawValue).tag(DataStorageUnit.kilobyte)
-                Text(DataStorageUnit.megabyte.rawValue).tag(DataStorageUnit.megabyte)
-                Text(DataStorageUnit.gigabyte.rawValue).tag(DataStorageUnit.gigabyte)
-            }
-            .pickerStyle(SegmentedPickerStyle())
-
-            TextField("e.g.: 1024", text: $input)
-                .keyboardType(.numberPad)
+        NavigationView {
             
-            Picker("To unit:", selection: $toUnit) {
-                Text(DataStorageUnit.bit.rawValue).tag(DataStorageUnit.bit)
-                Text(DataStorageUnit.nibble.rawValue).tag(DataStorageUnit.nibble)
-                Text(DataStorageUnit.byte.rawValue).tag(DataStorageUnit.byte)
-                Text(DataStorageUnit.kilobyte.rawValue).tag(DataStorageUnit.kilobyte)
-                Text(DataStorageUnit.megabyte.rawValue).tag(DataStorageUnit.megabyte)
-                Text(DataStorageUnit.gigabyte.rawValue).tag(DataStorageUnit.gigabyte)
+            Form {
+                
+                // UI to allow user to select units we are converting from
+                Section(header: Text("Converting from?")) {
+                    
+                    Picker("From unit:", selection: $fromUnit) {
+                        Text(DataStorageUnit.bit.rawValue).tag(DataStorageUnit.bit)
+                        Text(DataStorageUnit.nibble.rawValue).tag(DataStorageUnit.nibble)
+                        Text(DataStorageUnit.byte.rawValue).tag(DataStorageUnit.byte)
+                        Text(DataStorageUnit.kilobyte.rawValue).tag(DataStorageUnit.kilobyte)
+                        Text(DataStorageUnit.megabyte.rawValue).tag(DataStorageUnit.megabyte)
+                        Text(DataStorageUnit.gigabyte.rawValue).tag(DataStorageUnit.gigabyte)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    
+                }
+                
+                
+                // UI to allow user to provide value to be converted
+                Section(header: Text("Value to convert?")) {
+                    TextField("e.g.: 1024", text: $input)
+                        .keyboardType(.numberPad)
+                }
+                
+                // UI to allow user to select units to convert to
+                Section(header: Text("Converting to?")) {
+                    
+                    Picker("To unit:", selection: $toUnit) {
+                        Text(DataStorageUnit.bit.rawValue).tag(DataStorageUnit.bit)
+                        Text(DataStorageUnit.nibble.rawValue).tag(DataStorageUnit.nibble)
+                        Text(DataStorageUnit.byte.rawValue).tag(DataStorageUnit.byte)
+                        Text(DataStorageUnit.kilobyte.rawValue).tag(DataStorageUnit.kilobyte)
+                        Text(DataStorageUnit.megabyte.rawValue).tag(DataStorageUnit.megabyte)
+                        Text(DataStorageUnit.gigabyte.rawValue).tag(DataStorageUnit.gigabyte)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    
+                }
+
+                // UI to show the result
+                Section(header: Text("Result is:")) {
+                    
+                    Text(output)
+                        // Ensures text will wrap to multiple lines
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+
             }
-            .pickerStyle(SegmentedPickerStyle())
-
-
-            Text(output)
+            .navigationTitle("Storage Converter")
+            
         }
+        
     }
 }
 
