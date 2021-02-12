@@ -2,40 +2,40 @@
 //  ContentView.swift
 //  iOS-DataStorageConverter
 //
-//  Created by Yining Wang on 2021-02-12.
+//  Created by Russell Gordon on 2021-02-12.
 //
-
-
-
-
 
 import SwiftUI
 
 struct ContentView: View {
     
-    //MARK: Stored properties
-    
-    
+    // MARK: Stored properties
+    @State private var fromUnit: DataStorageUnit = .bit
     @State private var input: String = ""
-    
-    
-    //MARK: Computer properties
-    
-    private var output: String{
-        return"You typed in \(input)"
+
+    // MARK: Computed properties
+    private var output: String {
+        return "You typed in \(input) and selected \(fromUnit)"
     }
- 
-    
     
     var body: some View {
         
-        Form{
-            
-            TextField("e.g.: 1824", text: $input)
+        Form {
+            Picker("From unit:", selection: $fromUnit) {
+                Text(DataStorageUnit.bit.rawValue).tag(DataStorageUnit.bit)
+                Text(DataStorageUnit.nibble.rawValue).tag(DataStorageUnit.nibble)
+                Text(DataStorageUnit.byte.rawValue).tag(DataStorageUnit.byte)
+                Text(DataStorageUnit.kilobyte.rawValue).tag(DataStorageUnit.kilobyte)
+                Text(DataStorageUnit.megabyte.rawValue).tag(DataStorageUnit.megabyte)
+                Text(DataStorageUnit.gigabyte.rawValue).tag(DataStorageUnit.gigabyte)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+
+            TextField("e.g.: 1024", text: $input)
                 .keyboardType(.numberPad)
-         Text(output)
+
+            Text(output)
         }
-        
     }
 }
 
