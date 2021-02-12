@@ -5,10 +5,16 @@
 //  Created by Russell Gordon on 2021-02-12.
 //
 
+//
+//  ContentView.swift
+//  iOS-DataStorageConverter
+//
+//  Created by Russell Gordon on 2021-02-12.
+//
 import SwiftUI
 
 struct ContentView: View {
-    
+
     // MARK: Stored properties
     @State private var fromUnit: DataStorageUnit = .bit
     @State private var input: String = ""
@@ -17,9 +23,9 @@ struct ContentView: View {
     private var output: String {
         return "You typed in \(input) and selected \(fromUnit)"
     }
-    
+
     var body: some View {
-        
+
         Form {
             Picker("From unit:", selection: $fromUnit) {
                 Text(DataStorageUnit.bit.rawValue).tag(DataStorageUnit.bit)
