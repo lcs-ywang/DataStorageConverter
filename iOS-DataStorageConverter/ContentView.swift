@@ -5,11 +5,22 @@
 //  Created by Yining Wang on 2021-02-12.
 //
 
+
+
+
+
 import SwiftUI
 
 struct ContentView: View {
+    
+    private var name: String = "Luck"
+    
+    private var greating: String{
+        return "Hello.\(name)"
+    }
+    
     var body: some View {
-        Text("Hello, world!")
+        Text(greating)
             .padding()
     }
 }
