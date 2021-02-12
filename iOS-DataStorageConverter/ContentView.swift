@@ -13,15 +13,22 @@ import SwiftUI
 
 struct ContentView: View {
     
-    private var name: String = "Luck"
+    @State private var name: String = ""
     
     private var greating: String{
         return "Hello.\(name)"
     }
     
     var body: some View {
-        Text(greating)
-            .padding()
+        
+        VStack{
+            
+            TextField("Enter your name", text:$name)
+            
+            Text(greating)
+                .padding()
+        }
+        
     }
 }
 
