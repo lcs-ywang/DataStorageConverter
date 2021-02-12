@@ -13,30 +13,27 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var name: String = ""
+    //MARK: Stored properties
     
-    @State private var feeling: String = ""
     
-    private var greating: String{
-        return "Hello.\(name), you are \(feeling)"
+    @State private var input: String = ""
+    
+    
+    //MARK: Computer properties
+    
+    private var output: String{
+        return"You typed in \(input)"
     }
+ 
+    
     
     var body: some View {
         
         Form{
             
-            TextField("Enter your name", text:$name)
-            
-            Picker("Mood", selection: $feeling){
-                Text("😃").tag("Happy")
-                Text("🙂").tag("Fine")
-                Text("😭").tag("Sad")
-            }
-            
-            .pickerStyle(SegmentedPickerStyle())
-            
-            Text(greating)
-                .padding()
+            TextField("e.g.: 1824", text: $input)
+                .keyboardType(.numberPad)
+         Text(output)
         }
         
     }
